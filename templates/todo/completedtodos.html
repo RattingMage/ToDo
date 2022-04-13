@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Completed</title>
+</head>
+<body>
+{% extends 'todo/base.html' %}
+{% block content %}
+    <h1 align="center">Completed</h1>
+    <ul>
+        {% for todo in todos %}
+            {% if todo.status %}
+                {% if todo.memo %}
+                    <a href="{% url 'viewtodo' todo.id %}"><b><li>{{ todo.title }} - {{ todo.memo }} - {{ todo.datecompleted|date:'M j Y H:i' }}</li></b></a>
+                {% else %}
+                    <a href="{% url 'viewtodo' todo.id %}"><b><li>{{ todo.title }} - {{ todo.datecompleted|date:'M j Y H:i' }}</li></b></a>
+                {% endif %}
+            {% else %}
+                {% if todo.memo %}
+                    <a href="{% url 'viewtodo' todo.id %}"><li>{{ todo.title }} - {{ todo.memo }} - {{ todo.datecompleted|date:'M j Y H:i' }}</li></a>
+                {% else %}
+                    <a href="{% url 'viewtodo' todo.id %}"><li>{{ todo.title }} - {{ todo.datecompleted|date:'M j Y H:i' }}</li></a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}
+</body>
+</html>

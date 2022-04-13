@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Current</title>
+</head>
+<body>
+{% extends 'todo/base.html' %}
+{% block content %}
+    <h1 align="center">Todos</h1>
+    <ul>
+        {% for todo in todos %}
+            {% if todo.status %}
+                {% if todo.memo %}
+                    <a href="{% url 'viewtodo' todo.id %}"><b><li>{{ todo.title }} - {{ todo.memo }}</li></b></a>
+                {% else %}
+                    <a href="{% url 'viewtodo' todo.id %}"><b><li>{{ todo.title }}</li></b></a>
+                {% endif %}
+            {% else %}
+                {% if todo.memo %}
+                    <a href="{% url 'viewtodo' todo.id %}"><li>{{ todo.title }} - {{ todo.memo }}</li></a>
+                {% else %}
+                    <a href="{% url 'viewtodo' todo.id %}"><li>{{ todo.title }}</li></a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+</body>
+</html>
